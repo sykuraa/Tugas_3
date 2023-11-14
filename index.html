@@ -1,73 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>LATIHAN BootStrap</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Latihan DOM</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script defer src="https://use.fontawesome.com/releases/v5.8.1/js/all.js" integrity="sha384-g5uSoOSBd7KkhAMlnQILrecXvzst9TdC09/VM+pjDTCM+1il8RHz5fKANTFFb+gQ" crossorigin="anonymous"></script>
-  </head>
+</head>
 
-  <body>
+<body >
     <div class="container">
-      <!-- NAV START -->
-      <nav class="navbar navbar-light bg-light">
-        <a class="navbar-brand">Mini Ecommerce</a>
-        <form class="form-inline" id="formItem">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" id="keyword" aria-label="Search" />
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="searchItem">Search</button>
-        </form>
-        <button class="btn btn-primary" id="cart"><i class="fas fa-shopping-cart"></i><span id="cartItemCount">(0)</span></button>
-      </nav>
-      <!-- NAV END -->
-      <div class="row">
-        <div class="row col-md-12 mt-2 ml-1" id="listBarang">
-          <!-- Kerjakan dibawah ini! -->
-          
-          <div class="card mr-4 mt-2" style="width: 22rem">
-            <img src="msi.jpg" class="card-img-top" alt="..." />
-            <div class="card-body">
-              <h5 class="card-title">Keyboard MSI</h5>
-              <p class="card-text">Keyboard gaming</p>
-              <p class="card-text">Rp 130.000.000,00</p>
-              <a href="#" class="btn btn-primary">Add to Cart</a>
-            </div>
-          </div>
+        <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand">Tech E-Commerce</a>
+            <form class="form-inline" id="formItem">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" id="keyword" aria-label="Search" autocomplete="off">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="searchItem">Search</button>
+            </form>
+            <button class="btn btn-primary" id="cart"><i class="fas fa-shopping-cart"></i><span id="cartItemCount">(0)</span></button>
+        </nav>
+        <div class="row">
+            <div class="row col-md-12 mt-2" id="listBarang">
 
-          <div class="card mr-4 mt-2" style="width: 22rem">
-            <img src="logitek.jpg" class="card-img-top mt-5" alt="..." />
-            <div class="card-body">
-              <h5 class="card-title mt-3">Keyboard Logitek</h5>
-              <p class="card-text">Keyboard standard</p>
-              <p class="card-text">Rp 60.000.000,00</p>
-              <a href="#" class="btn btn-primary">Add to Cart</a>
             </div>
-          </div>
-
-          <div class="card mt-2" style="width: 22rem">
-            <img src="geniuss.jpeg" class="card-img-top mt-4" alt="..." />
-            <div class="card-body">
-              <h5 class="card-title mt-4">Mouse Genius</h5>
-              <p class="card-text">Mouse Genius.</p>
-              <p class="card-text">Rp 40.000.000,00</p>
-              <a href="#" class="btn btn-primary">Add to Cart</a>
-            </div>
-          </div>
-
-          <div class="card mt-4" style="width: 22rem">
-            <img src="jerry.jpg" class="card-img-top" alt="..." />
-            <div class="card-body">
-              <h5 class="card-title">Mouse jerry</h5>
-              <p class="card-text">Mouse standar untuk segala kondisi</p>
-              <p class="card-text">Rp 35.000.000,00</p>
-              <a href="#" class="btn btn-primary">Add to Cart</a>
-            </div>
-          </div>
         </div>
-      </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  </body>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const listBarang = document.getElementById("listBarang");
+            const formItem = document.getElementById("formItem");
+            const keywordInput = document.getElementById("keyword");
+            let totalBarangDiKeranjang = 0;
+
+            var items = [
+    ['001', 'Keyboard Logitek', 800000, 'Keyboard yang mantap untuk kantoran', 'logitek.jpg'],
+    ['002', 'Keyboard MSI', 450000, 'Keyboard gaming MSI mekanik terbaik untuk set gaming', 'msi.jpg'],
+    ['003', 'Mouse Genius', 60000, 'Mouse Genius biar lebih pintar dan cocok dibawa kemanapun', 'geniuss.jpeg'],
+    ['004', 'Mouse Jerry', 50000, 'Mouse kabel standar yang nyaman ditangan', 'jerry.jpg'],
+    ['005', 'Setup Gaming', 9190000, 'Setup keren dengan spek tinggi cocok untuk CC / Gamers', "Geming.jpg" ]
+    
+]
+
+            function Cari(keyword) {
+                listBarang.innerHTML = "";
+                for (let i = 0; i < items.length; i++) {
+                    const item = items[i];
+                    if (item[1].toLowerCase().includes(keyword.toLowerCase())) {
+                        const card = document.createElement("div");
+                        card.classList.add("col-4", "mt-2");
+                        card.innerHTML = `
+                            <div class ="col-4 mt-2"> 
+                                <div class="card" style="width: 18rem;">
+                                    <img src="${item[4]}" class="card-img-top" height="200px" width="200px" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title" id="itemName">${item[1]}</h5>
+                                        <p class="card-text" id="itemDesc">${item[3]}</p>
+                                        <p class="card-text">Rp ${item[2]}</p>
+                                        <a href="#" class="btn btn-primary add-to-cart" data-id="${item[0]}">Add to cart</a>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        listBarang.appendChild(card);
+                    }
+                }
+                const btnTambahKeKeranjang = document.querySelectorAll(".add-to-cart");
+                btnTambahKeKeranjang.forEach(button => {
+                    button.addEventListener("click", tambahKeKeranjang);
+                });
+            }
+            // menangani ketika tombol submit diklik
+            formItem.addEventListener("submit", function (e) {
+                e.preventDefault();
+                const keyword = keywordInput.value;
+                Cari(keyword);
+
+            });
+            document.getElementById("cart").addEventListener("click", function () {
+
+                if (totalBarangDiKeranjang <= 0) {
+                    Swal.fire(
+                        'Info!',
+                        'Cart successfully emptied!',
+                        'info'
+                    )
+                } else if (totalBarangDiKeranjang > 0 || totalBarangDiKeranjang === `9+`) {
+                    Swal.fire({
+                          title: 'Alert!  ',
+                        text: "Are you sure empty your basket?",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes!',
+                        cancelButtonText: 'Cancel!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            Swal.fire({
+                              icon: 'success',
+                              title: 'Cart successfully emptied!',
+                              showConfirmButton: false,
+                              timer: 1000}
+                )
+                            totalBarangDiKeranjang = 0;
+                            document.getElementById("cartItemCount").textContent = `(0)`;
+                        }
+                    });
+                }
+            });
+            function tambahKeKeranjang(event) {
+                const itemId = event.target.getAttribute("data-id");
+                // untuk mencari item dari array items yang punya id yg sama dengan itemId
+                const item = items.find(item => item[0] === itemId);
+
+                if (totalBarangDiKeranjang < 9) {
+                    totalBarangDiKeranjang++;
+                } else {
+                    totalBarangDiKeranjang = `9+`;
+                }
+
+                document.getElementById("cartItemCount").textContent = `(${totalBarangDiKeranjang})`;
+                Swal.fire({
+                  icon: 'success',
+                title: 'Added to Cart!',
+                text: `${item[1]} has been entered into your shopping card.`,
+                showConfirmButton: false,
+                timer: 1000}
+                )
+            }
+            // Menampilkan semua barang saat halaman dimuat
+            Cari("");
+        });
+    </script>
+</body>
 </html>
+
